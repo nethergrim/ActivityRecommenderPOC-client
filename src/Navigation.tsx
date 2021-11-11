@@ -19,7 +19,7 @@ export const AppStackScreen: any = () => {
       screenOptions={{
         headerStyle: {
           shadowOpacity: 0,
-          backgroundColor: 'rgba(40, 120, 205, 0.70)',
+          backgroundColor: 'rgba(80, 120, 205, 0.70)',
         },
         headerTintColor: 'rgba(255, 255, 255, 1.00)',
       }}

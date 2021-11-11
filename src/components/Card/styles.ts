@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   cardText: {
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
     color: '#FFFFFF',
     textShadowColor: '#000000',

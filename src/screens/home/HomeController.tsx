@@ -26,10 +26,10 @@ export const HomeScreenController = ({ navigation }: any) => {
   };
 
   return (
-    <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={appStyles.safeArea}>
+    <LinearGradient colors={['rgba(80, 120, 205, 0.70)', 'rgba(200, 120, 205, 0.70)']} style={appStyles.safeArea}>
       <SafeAreaView style={appStyles.safeArea}>
         <ScrollView style={styles.cards}>
-          <Image style={styles.image} source={require('./img/img1.jpg')} />
+          <Image style={styles.image} source={require('./img/img2.jpg')} />
           <Card
             text="Pair with a Smart Device"
             onClick={handleClickPair}
