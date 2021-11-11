@@ -25,7 +25,7 @@ module.exports = {
           '@ui': './src/ui',
           '@store': './src/store',
           '@components': './src/components',
-          '@api': './src/api',
+          '@services': './src/services',
           '@builders': './src/builders',
         },
       },
