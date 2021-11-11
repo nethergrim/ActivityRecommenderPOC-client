@@ -25,6 +25,10 @@ export const HomeScreenController = ({ navigation }: any) => {
     Alert.alert('Pairing is not ready yet', 'Will be available soon', [{ text: 'OK' }]);
   };
 
+  const handleNavigateRecommendations = React.useCallback(() => {
+    navigation.push('Recommendations');
+  }, [navigation]);
+
   return (
     <LinearGradient colors={['rgba(80, 120, 205, 0.70)', 'rgba(200, 120, 205, 0.70)']} style={appStyles.safeArea}>
       <SafeAreaView style={appStyles.safeArea}>
@@ -36,12 +40,13 @@ export const HomeScreenController = ({ navigation }: any) => {
             img={require('@components/Card/img/img1.jpg')}
           />
           <Card
-            text="Input measurements"
+            text="Measurements Input"
             onClick={handleClickMeasurements}
             img={require('@components/Card/img/img2.jpg')}
           />
           <Card
-            text="Observe Recommendations"
+            text="Recommendations"
+            onClick={handleNavigateRecommendations}
             img={require('@components/Card/img/img3.jpg')}
           />
         </ScrollView>

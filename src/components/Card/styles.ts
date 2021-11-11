@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
     textShadowColor: '#000000',
     textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 3,
+    textShadowRadius: 4,
   },
   card: {
     backgroundColor: 'white',

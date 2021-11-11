@@ -61,7 +61,7 @@ export const Measurements = ({ navigation }) => {
     if (recommendations && recommendations.length) {
       Alert.alert('Success', 'Your personal recommendations are ready, do you want to check them?',
         [
-          { text: 'Maybe later', style: 'cancel' },
+          { text: 'Back', style: 'cancel' },
           { text: 'Yes', onPress: handleNavigateRecommendations },
 
         ]);

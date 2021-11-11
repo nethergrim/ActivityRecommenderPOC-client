@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
 import { Measurements } from '@screens/measurements';
+import { Recommendations } from '@screens/recommendations';
 
 import { HomeScreenController } from 'screens/home/HomeController';
 
@@ -32,6 +33,11 @@ export const AppStackScreen: any = () => {
       <AppStack.Screen
         name="Measurements"
         component={Measurements}
+        options={{}}
+      />
+      <AppStack.Screen
+        name="Recommendations"
+        component={Recommendations}
         options={{}}
       />
     </AppStack.Navigator>
