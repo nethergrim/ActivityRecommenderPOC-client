@@ -1,4 +1,4 @@
-import { MeasurementsAction } from '.';
+import { MeasurementsAction } from './MeasurementsAction';
 
 const INITIAL_STATE = {
   weight: undefined,

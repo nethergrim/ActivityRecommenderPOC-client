@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080/v1';
+const API_URL = 'http://activity-recommender-bff.us-east-2.elasticbeanstalk.com:5000/v1';
 
 export const getRecommendations = (measurementSystem: string, weight: number, height: number, birthdate: Date) => {
   return fetch(
