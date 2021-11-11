@@ -1,10 +1,11 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import HomeScreenController from 'screens/home/HomeController';
+
+import { HomeScreenController } from 'screens/home/HomeController';
 
 export const navigationRef: any = React.createRef();
-export function navigate(parameters: {name: any; params: any}) {
-  let {name, params} = parameters;
+export function navigate(parameters: { name: any; params: any }) {
+  const { name, params } = parameters;
   navigationRef.current?.navigate(name, params);
 }
 
@@ -12,15 +13,17 @@ const AppStack = createStackNavigator();
 export const AppStackScreen: any = () => {
   return (
     <AppStack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Activity Recommendations"
       screenOptions={{
         headerStyle: {
           shadowOpacity: 0,
+          backgroundColor: 'rgba(40, 120, 205, 0.60)',
         },
-        headerTintColor: 'rgba(0, 0, 0, 0.88)',
-      }}>
+        headerTintColor: 'rgba(255, 255, 255, 1.00)',
+      }}
+    >
       <AppStack.Screen
-        name="Home"
+        name="Activity Recommendations"
         component={HomeScreenController}
         options={{}}
       />
