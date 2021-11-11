@@ -1,20 +1,10 @@
-coverage/
-resources/videos/
-resources/documents/
-tmp/
-.*.swp
 # OSX
 #
 .DS_Store
-android/.project
-changelog.txt
-*.xcarchive
+
 # Xcode
 #
-appbuild/
 build/
-build.xcarchive/
-derived_data/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -30,7 +20,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -39,18 +28,22 @@ build/
 .gradle
 local.properties
 *.iml
-*.hprof
+
+# Visual Studio Code
+#
+.vscode/
 
 # node.js
 #
 node_modules/
 npm-debug.log
 yarn-error.log
-.yarn/
 
 # BUCK
 buck-out/
 \.buckd/
+*.keystore
+!debug.keystore
 
 # fastlane
 #
@@ -67,14 +60,4 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-ios/Pods/
-.eslintcache
-
-
-# Keystores must be not commited to repo.
-*.keystore
-!debug.keystore
-ios/GoogleService-Info.plist
-fastlane/report.xml
-.scannerwork
-*.map
+/ios/Pods/
