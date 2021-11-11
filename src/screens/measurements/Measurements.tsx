@@ -13,6 +13,7 @@ import DatePicker from 'react-native-date-picker';
 
 import { useValidateInput } from './hooks/useValidateInput';
 import { styles } from './styles';
+import { useApplyMeasurements } from './hooks/useApplyMeasurements';
 
 import { appStyles } from 'commons/styles';
 
@@ -31,10 +32,13 @@ export const Measurements = () => {
     height, weight, birthdate, alert,
   });
 
+  const applyMeasurements = useApplyMeasurements({
+    height, weight, birthdate, usesMetricSystem,
+  });
+
   const handleApply = () => {
     if (validateInput()) {
-      // TODO make request
-
+      applyMeasurements();
     }
   };
 
