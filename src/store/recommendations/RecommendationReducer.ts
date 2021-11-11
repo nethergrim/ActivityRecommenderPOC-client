@@ -4,16 +4,32 @@ import { combineReducers } from 'redux';
 const INITIAL_STATE = {
   recommendations: [],
   error: undefined,
+  loading: false,
 };
 
 const reducer = (state = INITIAL_STATE, action: { type: string; payload: any }) => {
   switch (action.type) {
     case 'RECOMMENDATIONS_RECEIVED':
-      return { ...state, recommendations: action.payload, error: [] };
+      return {
+        ...state,
+        recommendations: action.payload,
+        loading: false,
+        error: undefined,
+      };
     case 'RECOMMENDATIONS_ERROR':
-      return { ...state, recommendations: [], error: action.payload };
+      return {
+        ...state,
+        recommendations: [],
+        loading: false,
+        error: action.payload,
+      };
     case 'CLEAR_RECOMMENDATIONS':
-      return { ...state, recommendations: [], error: [] };
+      return {
+        ...state,
+        recommendations: [],
+        error: undefined,
+        loading: true,
+      };
     default:
       return state;
   }

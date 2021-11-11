@@ -10,6 +10,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as RNLocalize from 'react-native-localize';
 import DatePicker from 'react-native-date-picker';
+import Spinner from 'react-native-loading-spinner-overlay';
+
+import { useRecommendations } from '../../store/recommendations';
 
 import { useValidateInput } from './hooks/useValidateInput';
 import { styles } from './styles';
@@ -22,11 +25,12 @@ const alert = (title: string) => {
   Alert.alert(title, '', [{ text: 'OK' }]);
 };
 
-export const Measurements = () => {
+export const Measurements = ({ navigation }) => {
   const usesMetricSystem = RNLocalize.usesMetricSystem();
   const [birthdate, setDate] = React.useState<Date | null>(null);
   const [weight, setWeight] = React.useState<string | undefined>();
   const [height, setHeight] = React.useState<string | undefined>();
+  const { loading, error, recommendations } = useRecommendations();
 
   const validateInput = useValidateInput({
     height, weight, birthdate, alert,
@@ -35,6 +39,24 @@ export const Measurements = () => {
   const applyMeasurements = useApplyMeasurements({
     height, weight, birthdate, usesMetricSystem,
   });
+
+  const handleNavigateRecommendations = React.useCallback(() => {
+    navigation.push('Recommendations');
+  }, []);
+
+  React.useEffect(() => {
+    if (error) {
+      Alert.alert('Error', error, [{ text: 'OK' }]);
+    }
+    if (recommendations && recommendations.length) {
+      Alert.alert('Success', "Your personal recommendations are ready, do you wan't to check them?",
+        [
+          { text: 'Maybe later', style: 'cancel' },
+          { text: 'Yes', onPress: handleNavigateRecommendations },
+
+        ]);
+    }
+  }, [error, recommendations, handleNavigateRecommendations]);
 
   const handleApply = () => {
     if (validateInput()) {
@@ -101,6 +123,11 @@ export const Measurements = () => {
             </LinearGradient>
           </TouchableOpacity>
         </ScrollView>
+        <Spinner
+          visible={loading}
+          textContent="Building Recommendations..."
+          textStyle={styles.spinnerTextStyle}
+        />
       </SafeAreaView>
     </LinearGradient>
   );
