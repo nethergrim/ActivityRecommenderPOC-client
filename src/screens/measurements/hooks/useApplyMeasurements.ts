@@ -5,9 +5,9 @@ import { getRecommendations } from '../../../services/RecommendationsAPI';
 import { clearRecommendations, errorReceived, recommendationsReceived } from '../../../store/recommendations';
 
 type Measurements = {
-  height: string | undefined;
-  weight: string | undefined;
-  birthdate: Date | null;
+  height: string;
+  weight: string;
+  birthdate: Date;
   usesMetricSystem: boolean;
 };
 

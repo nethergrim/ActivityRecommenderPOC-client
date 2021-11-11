@@ -42,14 +42,17 @@ export const Measurements = ({ navigation }) => {
 
   const handleNavigateRecommendations = React.useCallback(() => {
     navigation.push('Recommendations');
-  }, []);
+  }, [navigation]);
 
   React.useEffect(() => {
+    console.log(error);
+    console.log(recommendations);
+
     if (error) {
       Alert.alert('Error', error, [{ text: 'OK' }]);
     }
     if (recommendations && recommendations.length) {
-      Alert.alert('Success', "Your personal recommendations are ready, do you wan't to check them?",
+      Alert.alert('Success', 'Your personal recommendations are ready, do you want to check them?',
         [
           { text: 'Maybe later', style: 'cancel' },
           { text: 'Yes', onPress: handleNavigateRecommendations },
