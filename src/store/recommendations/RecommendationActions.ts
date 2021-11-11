@@ -1,6 +1,12 @@
-export const clearRecommendations = () => {
+export const loadRecommendations = () => {
   return {
-    type: 'CLEAR_RECOMMENDATIONS',
+    type: 'LOAD_RECOMMENDATIONS',
+  };
+};
+
+export const clearError = () => {
+  return {
+    type: 'CLEAR_ERROR',
   };
 };
 

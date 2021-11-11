@@ -11,8 +11,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as RNLocalize from 'react-native-localize';
 import DatePicker from 'react-native-date-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { useDispatch } from 'react-redux';
 
-import { useRecommendations } from '../../store/recommendations';
+import { clearError, useRecommendations } from '../../store/recommendations';
 
 import { useValidateInput } from './hooks/useValidateInput';
 import { styles } from './styles';
@@ -40,16 +41,22 @@ export const Measurements = ({ navigation }) => {
     height, weight, birthdate, usesMetricSystem,
   });
 
+  const dispatch = useDispatch();
+
   const handleNavigateRecommendations = React.useCallback(() => {
     navigation.push('Recommendations');
   }, [navigation]);
+
+  const handleClearError = () => {
+    dispatch(clearError());
+  };
 
   React.useEffect(() => {
     console.log(error);
     console.log(recommendations);
 
     if (error) {
-      Alert.alert('Error', error, [{ text: 'OK' }]);
+      Alert.alert('Error', error, [{ text: 'OK', onPress: handleClearError }]);
     }
     if (recommendations && recommendations.length) {
       Alert.alert('Success', 'Your personal recommendations are ready, do you want to check them?',

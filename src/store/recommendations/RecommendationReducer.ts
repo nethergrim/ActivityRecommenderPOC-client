@@ -23,12 +23,17 @@ const reducer = (state = INITIAL_STATE, action: { type: string; payload: any }) 
         loading: false,
         error: action.payload,
       };
-    case 'CLEAR_RECOMMENDATIONS':
+    case 'LOAD_RECOMMENDATIONS':
       return {
         ...state,
         recommendations: [],
         error: undefined,
         loading: true,
+      };
+    case 'CLEAR_ERROR':
+      return {
+        ...state,
+        error: undefined,
       };
     default:
       return state;

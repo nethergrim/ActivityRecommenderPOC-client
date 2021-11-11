@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { getRecommendations } from '../../../services/RecommendationsAPI';
-import { clearRecommendations, errorReceived, recommendationsReceived } from '../../../store/recommendations';
+import { loadRecommendations, errorReceived, recommendationsReceived } from '../../../store/recommendations';
 
 type Measurements = {
   height: string;
@@ -17,7 +17,7 @@ export const useApplyMeasurements = ({
   const measurementSystem = usesMetricSystem ? 'metric' : 'US';
   const dispatch = useDispatch();
   return React.useCallback(() => {
-    dispatch(clearRecommendations());
+    dispatch(loadRecommendations());
     getRecommendations(
       measurementSystem,
       Number.parseFloat(weight),
