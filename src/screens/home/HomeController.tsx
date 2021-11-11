@@ -1,6 +1,10 @@
+/* eslint-disable global-require */
 import React, { useEffect } from 'react';
 import {
-  SafeAreaView, ScrollView,
+  SafeAreaView,
+  ScrollView,
+  Alert,
+  Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -13,13 +17,33 @@ import { appStyles } from 'commons/styles';
 export const HomeScreenController = ({ navigation }: any) => {
   useEffect(() => {}, []);
 
+  const handleClickMeasurements = () => {
+    navigation.push('Measurements');
+  };
+
+  const handleClickPair = () => {
+    Alert.alert('Pairing is not ready yet', 'Will be available soon', [{ text: 'OK' }]);
+  };
+
   return (
     <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={appStyles.safeArea}>
       <SafeAreaView style={appStyles.safeArea}>
         <ScrollView style={styles.cards}>
-          <Card text="Pair with a Smart Device" />
-          <Card text="Input measurements" />
-          <Card text="Observe Recommendations" />
+          <Image style={styles.image} source={require('./img/img1.jpg')} />
+          <Card
+            text="Pair with a Smart Device"
+            onClick={handleClickPair}
+            img={require('@components/Card/img/img1.jpg')}
+          />
+          <Card
+            text="Input measurements"
+            onClick={handleClickMeasurements}
+            img={require('@components/Card/img/img2.jpg')}
+          />
+          <Card
+            text="Observe Recommendations"
+            img={require('@components/Card/img/img3.jpg')}
+          />
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>

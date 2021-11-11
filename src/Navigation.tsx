@@ -1,6 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
+import { Measurements } from '@screens/measurements';
+
 import { HomeScreenController } from 'screens/home/HomeController';
 
 export const navigationRef: any = React.createRef();
@@ -17,7 +19,7 @@ export const AppStackScreen: any = () => {
       screenOptions={{
         headerStyle: {
           shadowOpacity: 0,
-          backgroundColor: 'rgba(40, 120, 205, 0.60)',
+          backgroundColor: 'rgba(40, 120, 205, 0.70)',
         },
         headerTintColor: 'rgba(255, 255, 255, 1.00)',
       }}
@@ -25,6 +27,11 @@ export const AppStackScreen: any = () => {
       <AppStack.Screen
         name="Activity Recommendations"
         component={HomeScreenController}
+        options={{}}
+      />
+      <AppStack.Screen
+        name="Measurements"
+        component={Measurements}
         options={{}}
       />
     </AppStack.Navigator>
