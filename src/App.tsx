@@ -2,15 +2,20 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { recommendationsReducer } from '@store/recommendations';
+import { measurementsReducer } from '@store/measurements';
 
 import { AppStackScreen, navigationRef } from 'Navigation';
 
 const App = () => {
-  const store = createStore(recommendationsReducer);
+  const reducer = combineReducers({
+    recommendations: recommendationsReducer,
+    measurements: measurementsReducer,
+  });
+  const store = createStore(reducer);
   return (
     <>
       <StatusBar barStyle="dark-content" />

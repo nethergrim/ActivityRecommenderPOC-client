@@ -1,5 +1,4 @@
-/* eslint-disable import/no-default-export */
-import { combineReducers } from 'redux';
+import { RecommendationsAction } from '.';
 
 const INITIAL_STATE = {
   recommendations: [],
@@ -7,30 +6,30 @@ const INITIAL_STATE = {
   loading: false,
 };
 
-const reducer = (state = INITIAL_STATE, action: { type: string; payload: any }) => {
+export const recommendationsReducer = (state = INITIAL_STATE, action: { type: string; payload: any }) => {
   switch (action.type) {
-    case 'RECOMMENDATIONS_RECEIVED':
+    case RecommendationsAction.RECOMMENDATIONS_RECEIVED:
       return {
         ...state,
         recommendations: action.payload,
         loading: false,
         error: undefined,
       };
-    case 'RECOMMENDATIONS_ERROR':
+    case RecommendationsAction.RECOMMENDATIONS_ERROR:
       return {
         ...state,
         recommendations: [],
         loading: false,
         error: action.payload,
       };
-    case 'LOAD_RECOMMENDATIONS':
+    case RecommendationsAction.LOAD_RECOMMENDATIONS:
       return {
         ...state,
         recommendations: [],
         error: undefined,
         loading: true,
       };
-    case 'CLEAR_ERROR':
+    case RecommendationsAction.CLEAR_ERROR:
       return {
         ...state,
         error: undefined,
@@ -40,6 +39,3 @@ const reducer = (state = INITIAL_STATE, action: { type: string; payload: any }) 
   }
 };
 
-export const recommendationsReducer = combineReducers({
-  recommendations: reducer,
-});

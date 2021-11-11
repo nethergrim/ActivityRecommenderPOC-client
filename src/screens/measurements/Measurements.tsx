@@ -11,9 +11,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as RNLocalize from 'react-native-localize';
 import DatePicker from 'react-native-date-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useDispatch } from 'react-redux';
 
-import { clearError, useRecommendations } from '../../store/recommendations';
+import { actionClearError, useRecommendations } from '../../store/recommendations';
+import {
+  useMeasurements,
+} from '../../store/measurements';
+import { useSetWeight, useSetBirthdate, useSetHeight } from '../../store/measurements/hooks';
+import { useClearError } from '../../store/recommendations/hooks';
 
 import { useValidateInput } from './hooks/useValidateInput';
 import { styles } from './styles';
@@ -21,16 +25,13 @@ import { useApplyMeasurements } from './hooks/useApplyMeasurements';
 
 import { appStyles } from 'commons/styles';
 
-const START_DATE = new Date(2000, 0, 1);
 const alert = (title: string) => {
   Alert.alert(title, '', [{ text: 'OK' }]);
 };
 
 export const Measurements = ({ navigation }) => {
   const usesMetricSystem = RNLocalize.usesMetricSystem();
-  const [birthdate, setDate] = React.useState<Date | null>(null);
-  const [weight, setWeight] = React.useState<string | undefined>();
-  const [height, setHeight] = React.useState<string | undefined>();
+  const { weight, height, birthdate } = useMeasurements();
   const { loading, error, recommendations } = useRecommendations();
 
   const validateInput = useValidateInput({
@@ -41,15 +42,11 @@ export const Measurements = ({ navigation }) => {
     height, weight, birthdate, usesMetricSystem,
   });
 
-  const dispatch = useDispatch();
-
   const handleNavigateRecommendations = React.useCallback(() => {
     navigation.push('Recommendations');
   }, [navigation]);
 
-  const handleClearError = () => {
-    dispatch(clearError());
-  };
+  const handleClearError = useClearError();
 
   React.useEffect(() => {
     console.log(error);
@@ -92,7 +89,7 @@ export const Measurements = ({ navigation }) => {
             placeholder="5.5"
             returnKeyType="next"
             value={height}
-            onChangeText={setHeight}
+            onChangeText={useSetHeight()}
           />
           <Text style={styles.title}>
             Body weight,
@@ -105,7 +102,7 @@ export const Measurements = ({ navigation }) => {
             placeholder="140.0"
             returnKeyType="next"
             value={weight}
-            onChangeText={setWeight}
+            onChangeText={useSetWeight()}
           />
           <Text style={styles.title}>
             Select Birth Date
@@ -114,8 +111,8 @@ export const Measurements = ({ navigation }) => {
             style={styles.datepicker}
             open
             mode="date"
-            date={START_DATE}
-            onDateChange={setDate}
+            date={birthdate}
+            onDateChange={useSetBirthdate()}
           />
           <TouchableOpacity
             style={styles.buttonContainer}
