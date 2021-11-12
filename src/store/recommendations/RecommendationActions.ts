@@ -3,7 +3,14 @@ export enum RecommendationsAction {
   CLEAR_ERROR = 'CLEAR_ERROR',
   RECOMMENDATIONS_RECEIVED = 'RECOMMENDATIONS_RECEIVED',
   RECOMMENDATIONS_ERROR = 'RECOMMENDATIONS_ERROR',
+  CLEAR_RECOMMENDATIONS_RECEIVED = 'CLEAR_RECOMMENDATIONS_RECEIVED',
 }
+
+export const actionClearRecommendationsReceived = () => {
+  return {
+    type: RecommendationsAction.CLEAR_RECOMMENDATIONS_RECEIVED,
+  };
+};
 
 export const actionLoadRecommendations = () => {
   return {
@@ -29,6 +36,10 @@ export const actionErrorReceived = (error: string) => {
     type: RecommendationsAction.RECOMMENDATIONS_ERROR,
     payload: error,
   };
+};
+
+export const clearRecommendationsReceived = (dispatch: ReducerDispatch<RecommendationsAction>) => {
+  dispatch(actionClearRecommendationsReceived());
 };
 
 export const loadRecommendations = (dispatch: ReducerDispatch<RecommendationsAction>) => {

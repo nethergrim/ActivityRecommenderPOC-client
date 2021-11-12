@@ -5,11 +5,6 @@ declare interface ReducerAction<T = string, P = {}> {
 
 declare type ReducerDispatch<T = string, P = {}> = (action: ReducerAction<T, P>) => void;
 
-/**
- * @deprecated Do not use set timeout
- */
-declare const setTimeout: undefined;
-
 declare interface ArrayRenderer<P> {
   (item: P, index: number, array: Array<P>): JSX.Element | null;
   displayName: string;

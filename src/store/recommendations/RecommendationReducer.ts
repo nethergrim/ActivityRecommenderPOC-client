@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   recommendations: [],
   error: undefined,
   loading: false,
+  recommendationsReceived: false,
 };
 
 export const recommendationsReducer = (state = INITIAL_STATE, action: { type: string; payload: any }) => {
@@ -14,6 +15,7 @@ export const recommendationsReducer = (state = INITIAL_STATE, action: { type: st
         recommendations: action.payload,
         loading: false,
         error: undefined,
+        recommendationsReceived: true,
       };
     case RecommendationsAction.RECOMMENDATIONS_ERROR:
       return {
@@ -25,7 +27,6 @@ export const recommendationsReducer = (state = INITIAL_STATE, action: { type: st
     case RecommendationsAction.LOAD_RECOMMENDATIONS:
       return {
         ...state,
-        recommendations: [],
         error: undefined,
         loading: true,
       };
@@ -33,6 +34,11 @@ export const recommendationsReducer = (state = INITIAL_STATE, action: { type: st
       return {
         ...state,
         error: undefined,
+      };
+    case RecommendationsAction.CLEAR_RECOMMENDATIONS_RECEIVED:
+      return {
+        ...state,
+        recommendationsReceived: false,
       };
     default:
       return state;

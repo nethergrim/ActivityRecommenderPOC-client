@@ -5,6 +5,7 @@ import {
   Text,
   Alert,
   ScrollView,
+  InteractionManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,12 +13,12 @@ import * as RNLocalize from 'react-native-localize';
 import DatePicker from 'react-native-date-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-import { actionClearError, useRecommendations } from '../../store/recommendations';
+import { useRecommendations } from '../../store/recommendations';
 import {
   useMeasurements,
 } from '../../store/measurements';
 import { useSetWeight, useSetBirthdate, useSetHeight } from '../../store/measurements/hooks';
-import { useClearError } from '../../store/recommendations/hooks';
+import { useClearError, useClearRecommendationsReceived } from '../../store/recommendations/hooks';
 
 import { useValidateInput } from './hooks/useValidateInput';
 import { styles } from './styles';
@@ -32,7 +33,7 @@ const alert = (title: string) => {
 export const Measurements = ({ navigation }) => {
   const usesMetricSystem = RNLocalize.usesMetricSystem();
   const { weight, height, birthdate } = useMeasurements();
-  const { loading, error, recommendations } = useRecommendations();
+  const { loading, error, recommendationsReceived } = useRecommendations();
 
   const validateInput = useValidateInput({
     height, weight, birthdate, alert,
@@ -47,23 +48,23 @@ export const Measurements = ({ navigation }) => {
   }, [navigation]);
 
   const handleClearError = useClearError();
+  const handleClearRecommendationsReceived = useClearRecommendationsReceived();
 
   React.useEffect(() => {
-    console.log(error);
-    console.log(recommendations);
-
     if (error) {
-      Alert.alert('Error', error, [{ text: 'OK', onPress: handleClearError }]);
+      setTimeout(() => {
+        InteractionManager.runAfterInteractions(() => {
+          Alert.alert('Error', error, [{ text: 'OK', onPress: handleClearError }]);
+        });
+      }, 800);
     }
-    if (recommendations && recommendations.length) {
-      Alert.alert('Success', 'Your personal recommendations are ready, do you want to check them?',
-        [
-          { text: 'Back', style: 'cancel' },
-          { text: 'Yes', onPress: handleNavigateRecommendations },
-
-        ]);
+    if (recommendationsReceived) {
+      InteractionManager.runAfterInteractions(() => {
+        handleClearRecommendationsReceived();
+        handleNavigateRecommendations();
+      });
     }
-  }, [error, recommendations, handleNavigateRecommendations]);
+  }, [error, recommendationsReceived]);
 
   const handleApply = () => {
     if (validateInput()) {

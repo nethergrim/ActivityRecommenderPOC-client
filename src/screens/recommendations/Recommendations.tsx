@@ -14,7 +14,7 @@ import { styles } from './styles';
 
 import { appStyles } from 'commons/styles';
 
-const keyExtractor = ({ id }) => id;
+const keyExtractor = ({ id }) => String(id);
 
 const Item = ({ title, details }) => (
   <View style={styles.item}>
@@ -39,7 +39,7 @@ export const Recommendations = ({ navigation }) => {
 
         ]);
     }
-  }, [recommendations, navigation]);
+  }, []);
 
   const renderItem = ({ item }) => (
     <Item title={item.title} details={item.details} />

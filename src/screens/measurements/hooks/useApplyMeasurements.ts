@@ -15,9 +15,11 @@ export const useApplyMeasurements = ({
   height, weight, birthdate, usesMetricSystem,
 }: Measurements) => {
   const measurementSystem = usesMetricSystem ? 'metric' : 'US';
+
   const loadRecommendations = useLoadRecommendations();
   const errorReceived = useErrorReceived();
   const recommendationsReceived = useRecommendationsReceived();
+
   return React.useCallback(() => {
     loadRecommendations();
     getRecommendations(
